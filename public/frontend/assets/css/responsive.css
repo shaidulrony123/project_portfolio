@@ -1,0 +1,205 @@
+@media (min-width: 1400px) {
+ 
+}
+
+@media(min-width: 1200px) and (max-width: 1399.98px) {
+   
+}
+
+@media(min-width: 992px) and (max-width: 1199.98px) {
+    .main-menu {
+        width: 100%; 
+       padding: 0; 
+    }
+    .banner-img {
+        margin-top: 27%;
+    }
+    .what-text p {
+        width: 78%;
+    }
+    .main-btn {
+        padding: 1em 1em;
+    }
+    .service-item h3 {
+        padding: 13px 0;
+        font-size: 23px;
+    }
+    .work-left-text p {
+        font-size: 16px;
+    }
+    .pricing-table ul li {
+        font-size: 15px;
+    }
+    
+}
+
+@media(min-width: 768px) and (max-width: 991.98px) {
+    .work-with-me, .what-text {
+        display: block;
+    }
+    .work-left-text h2 {
+        font-size: 30px;
+    }
+    .custom-blog{
+        margin-top: 24px !important;
+    }
+    .custom-project{
+        margin-top: 24px !important;
+    }
+    .cus-top{
+        margin-top: 24px !important;
+    }
+    .project-inner .porject-details {
+        bottom: -182px;
+    }
+    .main-menu {
+        width: 100%;
+    }
+    .social-media a, .social-icons a {
+        margin: 0 3px;
+    }
+    .resume-img {
+        height: 150px;
+        width: 150px;
+        line-height: 150px;
+    }
+    
+}
+
+@media(min-width: 576px) and (max-width: 767.98px) {
+    .main-btn {
+        padding: 1em 1em;
+    }
+    .work-with-me, .what-text {
+        display: block;
+    }
+    .what-text p {
+        width: 100%;
+    }
+    .work-left-text h2 {
+        font-size: 29px;
+    }
+    .what-i-do h2 {
+        font-size: 35px;
+    }
+    .project-img{
+        margin-bottom: 24px;
+    }
+    .blog-content{
+        margin-bottom: 24px;
+    }
+    .banner-left-text h2 {
+        font-size: 40px;
+    }
+    /* portfolio section */
+    .portfolio-banner-content {
+        width: 100%;
+    }
+    .portfolio-banner-content h2 {
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 35px;
+        padding: 10px 0;
+    }
+    #footer {
+        margin-bottom: 70px;
+    }
+    /* portfolio section */
+    /* service section */
+    .custom-order h3 {
+        font-size: 29px;
+    }
+    #custom-order {
+        padding: 0 0;
+        /* border-bottom: 1px solid #dbdada; */
+    }
+    .custom-order p {
+        width: 100%;
+    }
+    #pricing {
+        padding-top: 10px 40px;
+    }
+    .custom-order{
+        margin-bottom: 30px;
+    }
+    /* service section */
+
+    /* product section */
+    .product-content{
+        margin-bottom: 24px;
+    }
+    .custom_port h2{
+        font-size: 26px !important;
+    }
+    /* product section */
+  
+}
+
+@media (max-width: 575.98px) {
+    .main-btn {
+        padding: 1em 1em;
+    }
+    .work-with-me, .what-text {
+        display: block;
+    }
+    .what-text p {
+        width: 100%;
+    }
+    .work-left-text h2 {
+        font-size: 29px;
+    }
+    .what-i-do h2 {
+        font-size: 35px;
+    }
+    .project-img{
+        margin-bottom: 24px;
+    }
+    .blog-content{
+        margin-bottom: 24px;
+    }
+    .banner-left-text h2 {
+        font-size: 40px;
+    }
+    /* portfolio section */
+    .portfolio-banner-content {
+        width: 100%;
+    }
+    .portfolio-banner-content h2 {
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 35px;
+        padding: 10px 0;
+    }
+    #footer {
+        margin-bottom: 70px;
+    }
+    /* portfolio section */
+    /* service section */
+    .custom-order h3 {
+        font-size: 29px;
+    }
+    #custom-order {
+        padding: 0 0;
+        /* border-bottom: 1px solid #dbdada; */
+    }
+    .custom-order p {
+        width: 100%;
+    }
+    #pricing {
+        padding-top: 10px 40px;
+    }
+    .custom-order{
+        margin-bottom: 30px;
+    }
+    /* service section */
+
+    /* product section */
+    .product-content{
+        margin-bottom: 24px;
+    }
+    .custom_port h2{
+        font-size: 26px !important;
+    }
+    /* product section */
+   
+}
