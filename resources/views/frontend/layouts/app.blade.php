@@ -11,6 +11,7 @@
             @yield('content')
             <section class="intro text-center my-5">
                <div class="container">
+              
                 <div class="row">
                     <div class="col-lg-7 order-2 order-lg-1 order-md-1">
                         <div class="wow fadeInLeft banner-left-text">

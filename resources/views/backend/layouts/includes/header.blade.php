@@ -39,7 +39,7 @@
     <script src="{{asset('backend/assets/js/axios.min.js')}}"></script>
 	{{-- <script src="{{asset('backend/assets/js/config.js')}}"></script> --}}
     <script src="{{asset('backend/assets/js/sweetalert2@11.js')}}"></script>
-	<title>Dashboard</title>
+	<title>Shaidul's Portfolio</title>
 </head>
 
 <body>
