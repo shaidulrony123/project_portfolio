@@ -4,7 +4,7 @@
 <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/slick.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
-<script src="{{ asset('frontend/assets/js/script.js') }}"></script>
+{{-- <script src="{{ asset('frontend/assets/js/script.js') }}"></script> --}}
 <script>
       // Count Up Animation
   document.addEventListener("DOMContentLoaded", function () {
@@ -27,6 +27,7 @@
     });
   });
 </script>
+
 <script>
     $('.feedback-slider').slick({
         slidesToShow: 2, // Number of slides to show at a time
@@ -57,8 +58,8 @@
         ]
       });
 </script>
+
 <script>
-  
   new WOW().init();
 </script>
 </body>

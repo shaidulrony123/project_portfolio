@@ -24,6 +24,10 @@
                                 <input type="text" class="form-control" id="homeSidebarSlugUpdate">
                             </div>
                             <div class="col-12 p-1">
+                                <label class="form-label mt-2">Description</label>
+                                <input type="text" class="form-control" id="homeSidebarDescriptionUpdate">
+                            </div>
+                            <div class="col-12 p-1">
                                 <label class="form-label mt-2">Github Update</label>
                                 <input type="text" class="form-control" id="githubLinkUpdate">
                             </div>
@@ -63,6 +67,7 @@
 
                 document.getElementById('homeSidebarNameUpdate').value = sidebar.name;
                 document.getElementById('homeSidebarSlugUpdate').value = sidebar.slug;
+                document.getElementById('homeSidebarDescriptionUpdate').value = sidebar.description;
                 document.getElementById('githubLinkUpdate').value = sidebar.github_link;
                 document.getElementById('twitterLinkUpdate').value = sidebar.twitter_link;
                 document.getElementById('linkedinLinkUpdate').value = sidebar.linkedin_link;
@@ -91,6 +96,7 @@
     formData.append('id', document.getElementById('updateID').value);
     formData.append('name', document.getElementById('homeSidebarNameUpdate').value);
     formData.append('slug', document.getElementById('homeSidebarSlugUpdate').value);
+    formData.append('description', document.getElementById('homeSidebarDescriptionUpdate').value);
     formData.append('github_link', document.getElementById('githubLinkUpdate').value);
     formData.append('twitter_link', document.getElementById('twitterLinkUpdate').value);
     formData.append('linkedin_link', document.getElementById('linkedinLinkUpdate').value);

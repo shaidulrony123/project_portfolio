@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('name');
             $table->string('slug');
+            $table->string('description');
             $table->string('github_link');
             $table->string('twitter_link');
             $table->string('linkedin_link');

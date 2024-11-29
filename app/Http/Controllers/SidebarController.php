@@ -82,6 +82,7 @@ class SidebarController extends Controller
             $sidebar->update([
                 'name' => $request->input('name'),
                 'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
                 'github_link' => $request->input('github_link'),
                 'twitter_link' => $request->input('twitter_link'),
                 'linkedin_link' => $request->input('linkedin_link'),

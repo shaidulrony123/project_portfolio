@@ -45,33 +45,41 @@
             </li>
             <li class="menu-label">Pages</li>
             <li>
-                <a href="{{ url('news-page') }}">
+                <a href="{{ url('service-page') }}">
                     <div class="parent-icon"><i class='bx bx-news'></i>
                     </div>
-                    <div class="menu-title">News</div>
+                    <div class="menu-title">Service</div>
                 </a>
             </li>
             <li>
-                <a href="{{ url('topheader-page') }}">
+                <a href="{{ url('home-sidebar-page') }}">
                     <div class="parent-icon"><i class='bx bx-news'></i>
                     </div>
-                    <div class="menu-title">Top Header</div>
+                    <div class="menu-title">Sidebar</div>
                 </a>
             </li>
             <li>
-                <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class='bx bx-category'></i>
-    
+                <a href="{{ url('project-page') }}">
+                    <div class="parent-icon"><i class='bx bx-news'></i>
                     </div>
-                    <div class="menu-title">Categories</div>
+                    <div class="menu-title">Project</div>
                 </a>
-                <ul>
-                    <li> <a href="{{ url('category-page') }}"><i class='bx bx-radio-circle'></i>Category List</a>
-                    </li>
-                    <li> <a href="{{ url('sub-category-page') }}"><i class='bx bx-radio-circle'></i>Sub Category List</a>
-                    </li>
-                </ul>
             </li>
+            <li>
+                <a href="{{ url('category-page') }}">
+                    <div class="parent-icon"><i class='bx bx-news'></i>
+                    </div>
+                    <div class="menu-title">Category List</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('blog-page') }}">
+                    <div class="parent-icon"><i class='bx bx-news'></i>
+                    </div>
+                    <div class="menu-title">Blog</div>
+                </a>
+            </li>
+          
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-category"></i>

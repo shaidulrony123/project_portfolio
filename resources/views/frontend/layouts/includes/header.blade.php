@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
+    <script src="{{ asset('frontend/assets/js/axios.min.js') }}"></script>
     <style>
         /* Hide sidebar on small screens */
 
