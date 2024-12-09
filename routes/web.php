@@ -3,14 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PricingController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfileSettingsController;
 
-Route::get('/', [HomeController::class, 'HomePage']);
+Route::get('/', [HomeController::class, 'HomePage'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('backend.layouts.app');
@@ -24,15 +27,30 @@ Route::middleware('auth')->group(function () {
 // frontend route
     // service page route
     Route::get('/get-service-data', [ServiceController::class, 'GetServiceData']);
+    // product page route
+    Route::get('/get-product-data', [ProductController::class, 'GetProductData']);
+    // blog page route
+    Route::get('/get-blog-data', [BlogController::class, 'GetBlogData']);
     // project page route
     Route::get('/get-project-data', [ProjectController::class, 'GetProjectData']);
     // portfolio page route
-    Route::get('/get-portfolio', [HomeController::class, 'GetPortfolioData']);
+    Route::get('/get-portfolio', [HomeController::class, 'GetPortfolioPage'])->name('portfolio');
     // service page route
-    Route::get('/get-service', [HomeController::class, 'GetServiceData']);
+    Route::get('/get-service', [HomeController::class, 'GetServicePage'])->name('service');
+    // resume page route
+    Route::get('/get-resume', [HomeController::class, 'GetResumePage'])->name('resume');
+    // product page route
+    Route::get('/get-product', [HomeController::class, 'GetProductPage'])->name('product');
+    // blog page route
+    Route::get('/get-blog', [HomeController::class, 'GetBlogPage'])->name('blog');
+
+    // contact page route
+    Route::get('/get-contact', [HomeController::class, 'GetContactPage'])->name('contact');
+    Route::get('/contact-categories', [ContactController::class, 'getCategories']);
 // frontend route
 
 // Home sidebar route
+Route::middleware(['auth'])->group(function () {
 Route::get("/home-sidebar-page", [SidebarController::class, 'HomeSidebarPage']);
 Route::get("/home-sidebar-list", [SidebarController::class, 'HomeSidebarList']);
 Route::post("/home-sidebar-by-id", [SidebarController::class, 'HomeSidebarById']);
@@ -88,4 +106,30 @@ Route::post("/pricing-update", [PricingController::class, 'PricingUpdate']);
 Route::post("/pricing-delete", [PricingController::class, 'PricingDelete']);
 // pricing page route
 
+// product page route
+Route::get("/product-page", [ProductController::class, 'ProductPage']);
+Route::get("/product-list", [ProductController::class, 'ProductList']);
+Route::post("/product-by-id", [ProductController::class, 'ProductById']);
+Route::post('/product-create', [ProductController::class, 'ProductCreate']);
+Route::post("/product-update", [ProductController::class, 'ProductUpdate']);
+Route::post("/product-delete", [ProductController::class, 'ProductDelete']);
+// product page route
+
+// contact page route
+
+
+Route::get("/contact-page", [ContactController::class, 'ContactPage']);
+Route::get("/contact-list", [ContactController::class, 'ContactList']);
+Route::post("/contact-by-id", [ContactController::class, 'ContactById']);
+Route::post('/contact-create', [ContactController::class, 'ContactCreate']);
+Route::post("/contact-update", [ContactController::class, 'ContactUpdate']);
+Route::post("/contact-delete", [ContactController::class, 'ContactDelete']);
+Route::get('/contact/download/{filename}', [ContactController::class, 'downloadDocumentation']);
+
+// contact page route
+
+Route::get('/profile-page', [ProfileSettingsController::class, 'ProfilePage']);
+Route::post('/change-password', [ProfileSettingsController::class, 'changePassword'])->name('change-password');
+Route::post("/profile-update", [ProfileSettingsController::class, 'ProfileUpdate']);
+});
 require __DIR__.'/auth.php';

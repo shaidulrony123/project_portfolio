@@ -11,8 +11,9 @@
                         <p>
                             I have more than 10 years' experience building software for clients all over the world. Below is a quick overview of my main technical skill sets and technologies I use. Want to find out more about my experience? Check out my online resume and project portfolio.
                         </p>
-                        <button class="main-btn">
-                            View Resume
+                        <button class="main-btn" id="seeAllArticlesBtn">
+
+                            <a class="text-white" href="{{ url('/get-resume') }}">View Resume</a>
                             <div class="arrow-wrapper">
                                 <div class="arrow"></div>
                             </div>
@@ -21,7 +22,7 @@
                     <div id="serviceContainer" class="row">
                         <!-- Dynamic Service Items Will Be Injected Here -->
                     </div>
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-4 mb-4">
                         <button id="loadMoreBtn" class="btn btn-primary d-none">Load More</button>
                     </div>
                 </div>
@@ -32,6 +33,17 @@
 <!-- What I do -->
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const button = document.getElementById('seeAllArticlesBtn');
+        const currentUrl = window.location.pathname; // Get the current path, e.g., "/get-blog"
+
+        // Hide "See All Articles" button on `/get-blog` page
+        if (currentUrl === '/get-service') {
+            button.classList.add('d-none'); // Use Bootstrap's d-none class
+        } else {
+            button.classList.remove('d-none');
+        }
+    });
     let serviceData = []; // Array to store fetched service data
     let itemsToShow = 4; // Number of items to display at a time
     let currentIndex = 0; // Track the current index of displayed items
@@ -40,14 +52,14 @@
         try {
             // Fetch service data from the backend
             const response = await axios.get('/get-service-data');
-            
+
             // Check for successful response
             if (response.data.status === 'success') {
                 serviceData = response.data.serviceDataList; // Store fetched data
-                
+
                 // Render initial set of items
                 renderServiceItems();
-                
+
                 // Show "Load More" button if there are more items to load
                 if (serviceData.length > itemsToShow) {
                     document.getElementById('loadMoreBtn').classList.remove('d-none');
@@ -61,31 +73,37 @@
     }
 
     function renderServiceItems() {
-        const serviceContainer = document.getElementById('serviceContainer');
-        
-        // Render next set of items
-        const items = serviceData.slice(currentIndex, currentIndex + itemsToShow);
-        items.forEach((item) => {
-            const serviceHTML = `
-                <div class="col-lg-3 col-md-6">
-                    <div class="wow fadeInUp service-item" data-wow-delay=".2s">
-                        <img src="${item.image}" alt="Service Image" style="max-height: 150px; object-fit: cover;">
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
+    const serviceContainer = document.getElementById('serviceContainer');
+
+    // Render next set of items
+    const items = serviceData.slice(currentIndex, currentIndex + itemsToShow);
+    items.forEach((item) => {
+        const serviceHTML = `
+            <div class="col-lg-3 col-md-6 mt-5">
+                <div class="wow fadeInUp service-item" data-wow-delay=".2s">
+                    <div class="service-images d-flex gap-2">
+                        ${item.images.map(image => `
+                            <img src="${image}" alt="Service Image">
+                        `).join('')}
                     </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+
                 </div>
-            `;
-            serviceContainer.insertAdjacentHTML('beforeend', serviceHTML);
-        });
+            </div>
+        `;
+        serviceContainer.insertAdjacentHTML('beforeend', serviceHTML);
+    });
 
-        // Update the current index
-        currentIndex += itemsToShow;
+    // Update the current index
+    currentIndex += itemsToShow;
 
-        // Hide "Load More" button if all items are displayed
-        if (currentIndex >= serviceData.length) {
-            document.getElementById('loadMoreBtn').classList.add('d-none');
-        }
+    // Hide "Load More" button if all items are displayed
+    if (currentIndex >= serviceData.length) {
+        document.getElementById('loadMoreBtn').classList.add('d-none');
     }
+}
+
 
     // Event listener for "Load More" button
     document.getElementById('loadMoreBtn').addEventListener('click', renderServiceItems);

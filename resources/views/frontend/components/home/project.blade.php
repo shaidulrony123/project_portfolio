@@ -10,8 +10,9 @@
                     </div>
                     <div class="wow fadeInUp what-text">
                         <p>My step-by-step guide ensures a smooth project journey, from the initial consultation to the final delivery. I take care of every detail, allowing you to focus on what you do best.</p>
-                        <button class="main-btn mt-3">
-                            View Portfolio
+                        <button class="main-btn mt-3" id="seeAllArticlesBtn">
+
+                            <a class="text-white" href="{{url('get-portfolio')}}">View Portfolio</a>
                             <div class="arrow-wrapper">
                                 <div class="arrow"></div>
                             </div>
@@ -28,14 +29,24 @@
             <div class="text-center mt-4">
                 <button id="project-load-more" class="btn btn-primary d-none">Load More</button>
             </div>
-            
+
         </div>
     </div>
 </section>
 <!-- Project Section -->
 
 <script>
+
     document.addEventListener('DOMContentLoaded', function () {
+        const button = document.getElementById('seeAllArticlesBtn');
+        const currentUrl = window.location.pathname; // Get the current path, e.g., "/get-blog"
+
+        // Hide "See All Articles" button on `/get-blog` page
+        if (currentUrl === '/get-portfolio') {
+            button.classList.add('d-none'); // Use Bootstrap's d-none class
+        } else {
+            button.classList.remove('d-none');
+        }
     // Initialize variables
     let projectData = []; // Array to store fetched project data
     let itemsToShow = 4; // Number of items to display at a time

@@ -10,7 +10,8 @@
                         <p>I am available for freelance projects. Hire me and get your project done.</p>
                     </div>
                     <button class="wow fadeInUp main-btn mt-3">
-                        Contact Me
+
+                        <a class="text-white" href="{{url('get-contact')}}">Contact Me</a>
                         <div class="arrow-wrapper">
                             <div class="arrow"></div>
                         </div>

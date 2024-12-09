@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
     <script src="{{ asset('frontend/assets/js/axios.min.js') }}"></script>
+    <script src="{{asset('frontend/assets/js/sweetalert2@11.js')}}"></script>
     <style>
         /* Hide sidebar on small screens */
 

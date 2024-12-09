@@ -86,7 +86,7 @@
      margin: 0 5px;
      color: #333;
   }
-/* 
+/*
   .nav-link {
      font-weight: bold;
      color: #333;
@@ -372,6 +372,7 @@
      margin-bottom: 20px;
      background-color: #fafafa;
      transition: all linear .3s;
+     height: 300px;
   }
 
   .service-item:hover {
@@ -510,6 +511,7 @@
   #feedback {
      padding: 80px 0;
      background-color: #fff;
+     border-bottom: 1px solid #ddd;
   }
 
   .feedback-inner {
@@ -584,7 +586,7 @@
   /* blog section */
   #blog {
      padding: 80px 0;
-     border-top: 1px solid #dbdada;
+     /* border-top: 1px solid #dbdada; */
   }
 
   .bolg-inner {
@@ -659,7 +661,7 @@
    align-items: center;
   }
   /* blog section */
-  
+
   /* portfolio section */
   .portfolio-banner-content{
    width: 70%;
@@ -788,7 +790,7 @@
    color: var(--third-color);
    background-color: var(--primary-color);
    display: inline-block;
-   
+
 }
 /* pricing section */
 
@@ -925,8 +927,36 @@
    position: relative;
    width: fit-content;
    margin: auto;
-   display: inline-block; 
+   display: inline-block;
 }
 
 /* Background Layer */
+
+.service-images img{
+   width: 50px;
+   height: 50px;
+   object-fit: cover;
+   border-radius: 10px;
+   transition: transform 0.3s ease;
+}
+.service-images img:hover{
+   transform: scale(1.05);
+}
+.blog-img img{
+   height: 235px;
+}
+.card-img-top{
+   height: 191px;
+}
+#create-contact-form{
+   background-color: #f8f9fa;
+   padding: 30px;
+   border-radius: 8px;
+}
+.nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+
+}
 

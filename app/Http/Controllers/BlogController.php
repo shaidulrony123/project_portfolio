@@ -59,7 +59,7 @@ class BlogController extends Controller
                 $img = $request->file('image');
                 $imgName = time() . '-' . $img->getClientOriginalName();
                 $img->move(public_path('frontend/assets/images/blog'), $imgName);
-                $imgUrl = "frontend/assets/images/blog/{$imgName}";
+                $imgUrl = $imgName;
             }
 
             Blog::create([
@@ -186,5 +186,19 @@ public function BlogDelete(Request $request)
         ]);
     }
 }
-    
+public function GetBlogData()
+{
+    try {
+        $blogDataList = Blog::with('category')->get(); // Fetch all services
+        return response()->json([
+            'status' => 'success',
+            'blogDataList' => $blogDataList,
+        ]);
+    } catch (Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+        ]);
+    }
+}
 }

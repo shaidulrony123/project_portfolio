@@ -1,7 +1,8 @@
 <?php use App\Models\Sidebar;
     $homeSidebar= Sidebar::first();
-?>  
-  
+    $currentRoute = Route::currentRouteName();
+?>
+
   <!-- Sidebar (Offcanvas for Mobile) -->
   <nav class="col-md-4 col-lg-2 d-none d-md-block sidebar">
     <div class="profile text-center mt-4">
@@ -17,45 +18,45 @@
     </div>
     <ul class="nav main-menu flex-column mt-4">
         <li class="nav-item">
-            <a class="nav-link active" href="{{ url('/') }}">
+            <a class="nav-link {{ $currentRoute === 'home' ? 'active' : '' }}" href="{{ url('/') }}">
                 <i class="fa-solid fa-user"></i> About Me
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/get-portfolio') }}">
+            <a class="nav-link {{ $currentRoute === 'portfolio' ? 'active' : '' }}" href="{{ url('/get-portfolio') }}">
                 <i class="fa-solid fa-briefcase"></i> Portfolio
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/get-service') }}">
+            <a class="nav-link {{ $currentRoute === 'service' ? 'active' : '' }}" href="{{ url('/get-service') }}">
                 <i class="fa-solid fa-cogs"></i> Services
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="resume.html">
+            <a class="nav-link {{ $currentRoute === 'resume' ? 'active' : '' }}" href="{{ url('/get-resume') }}">
                 <i class="fa-solid fa-file"></i> Resume
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="product.html">
+            <a class="nav-link {{ $currentRoute === 'product' ? 'active' : '' }}" href="{{ url('/get-product') }}">
                 <i class="fa-solid fa-box"></i> Products
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="blog.html">
+            <a class="nav-link {{ $currentRoute === 'blog' ? 'active' : '' }}" href="{{ url('/get-blog') }}">
                 <i class="fa-solid fa-blog"></i> Blog
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="contact.html">
+            <a class="nav-link {{ $currentRoute === 'contact' ? 'active' : '' }}" href="{{ url('/get-contact') }}">
                 <i class="fa-solid fa-envelope"></i> Contact
             </a>
         </li>
         <button class="main-btn text-center m-auto mt-5">
-          Hire Me
+         <a class="text-white" href="{{url('/get-contact')}}"> Hire Me</a>
           <div class="arrow-wrapper">
               <div class="arrow"></div>
-      
+
           </div>
       </button>
     </ul>

@@ -12,17 +12,15 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Image</th>
+                        <th>Images</th>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="tableList">
-
-
+                    <!-- Rows will be inserted here by JavaScript -->
                 </tbody>
-
             </table>
         </div>
     </div>
@@ -30,36 +28,46 @@
 
 <script>
     getServiceData();
+
     async function getServiceData() {
-    try {
-        let res = await axios.get('/service-list');
-        let tableList = $("#tableList");
-        $('#example').DataTable().destroy(); // Destroy existing DataTable
-        tableList.empty(); // Clear table
+        try {
+            let res = await axios.get('/service-list'); // Fetch data from the server
+            let tableList = $("#tableList");
+            $('#example').DataTable().destroy(); // Destroy existing DataTable
+            tableList.empty(); // Clear the table
 
-        res.data.rows.forEach(function (item, index) {
-            let row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td><img src="${item.image}" alt="Image" style="width: 50px; height: 50px;"></td>
-                    <td>${item.title}</td>
-                    <td>${item.description}</td>
-                
-                    <td>
-                        <button data-id="${item.id}" class="btn editBtn btn-outline-secondary">
-                            <i class="fadeIn animated bx bx-edit"></i>
-                        </button>
-                         <button data-id="${item.id}" class="btn deleteBtn btn-outline-danger">
-                            <i class="fadeIn animated bx bx-trash-alt"></i>
-                        </button>
+            res.data.rows.forEach(function (item, index) {
+                // Loop through the images array and create <img> tags for each image
+                let showingMultipleImage = '';
+                let images = item.images; // Get the array of images
 
-                    </td>
-                </tr>
-            `;
-            tableList.append(row);
-        });
+                // Check if images exist
+                if (images && Array.isArray(images)) {
+                    images.forEach(function (imageUrl) {
+                        showingMultipleImage += `<img src="${imageUrl}" alt="Image" style="width: 50px; height: 50px; margin-right: 5px;">`;
+                    });
+                }
 
-        $('.editBtn').on('click', async function () {
+                // Create a new row with the images and other service data
+                let row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${showingMultipleImage}</td> <!-- Display multiple images -->
+                        <td>${item.title}</td>
+                        <td>${item.description}</td>
+                        <td>
+                            <button data-id="${item.id}" class="btn editBtn btn-outline-secondary">
+                                <i class="fadeIn animated bx bx-edit"></i>
+                            </button>
+                            <button data-id="${item.id}" class="btn deleteBtn btn-outline-danger">
+                                <i class="fadeIn animated bx bx-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                tableList.append(row); // Append the row to the table
+            });
+            $('.editBtn').on('click', async function () {
             let id = $(this).data('id');
             await FillUpUpdateForm(id);
             $("#update-modal").modal('show');
@@ -71,15 +79,13 @@
             $("#deleteID").val(id);
         });
 
-        // Reinitialize DataTable
-        new DataTable('#example', {
-            order: [[0, 'desc']],
-            lengthMenu: [10, 20, 50, 100],
-        });
-    } catch (error) {
-        console.error('Error fetching sidebar data:', error);
+            // Reinitialize DataTable after populating the rows
+            new DataTable('#example', {
+                order: [[0, 'desc']],
+                lengthMenu: [10, 20, 50, 100],
+            });
+        } catch (error) {
+            console.error('Error fetching service data:', error);
+        }
     }
-}
-
-
 </script>

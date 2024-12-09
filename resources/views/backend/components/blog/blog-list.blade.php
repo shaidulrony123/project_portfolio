@@ -45,7 +45,7 @@
         <tr>
             <td>${index + 1}</td>
            <td>${item.category ? item.category.name : 'No Category'}
-            <td><img src="${item.image}" alt="Image" style="width: 50px; height: 50px;"></td>
+            <td><img src="frontend/assets/images/blog/${item.image}" alt="Image" style="width: 50px; height: 50px;"></td>
             <td>${item.title}</td>
             <td>${item.date}</td>
             <td>${item.description}</td>

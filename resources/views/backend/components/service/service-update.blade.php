@@ -10,10 +10,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <label class="form-label mt-2">Image</label>
-                                <input type="file" class="form-control" id="homeSidebarImageUpdate">
-                                <img id="imagePreview" src="{{ asset('images/default.png') }}" style="width: 100px; height: 100px; margin-top: 10px;">
-                                <input type="hidden" id="existingImagePath">
+                                <label class="form-label mt-2">Images</label>
+                                <input type="file" class="form-control" id="homeSidebarImageUpdate" multiple>
+                                <div id="imagePreviews" style="margin-top: 10px;"></div> <!-- Previews for multiple images -->
+                                <input type="hidden" id="existingImagePaths">
                             </div>
                             <div class="col-12 p-1">
                                 <label class="form-label mt-2">Title</label>
@@ -48,38 +48,57 @@
 
                 document.getElementById('serviceTitleUpdate').value = service.title;
                 document.getElementById('serviceDescriptionUpdate').value = service.description;
-                
 
-                // Populate image
-                document.getElementById('existingImagePath').value = service.image;
-                document.getElementById('imagePreview').src = service.image || '/images/default.png';
+                // Populate image previews (multiple images)
+                let existingImages = service.images || [];
+                document.getElementById('existingImagePaths').value = JSON.stringify(existingImages); // Store array of image paths
+                let previewDiv = document.getElementById('imagePreviews');
+                previewDiv.innerHTML = ''; // Clear previous previews
+
+                existingImages.forEach(imagePath => {
+                    let imgTag = document.createElement('img');
+                    imgTag.src = imagePath;
+                    imgTag.style = "width: 100px; height: 100px; margin-top: 10px; margin-right: 5px;";
+                    previewDiv.appendChild(imgTag);
+                });
             } else {
-                console.error('Failed to fetch sidebar details:', response.data.message);
+                console.error('Failed to fetch service details:', response.data.message);
             }
         } catch (error) {
-            console.error('Error fetching sidebar details:', error);
+            console.error('Error fetching service details:', error);
         }
     }
 
     document.getElementById('homeSidebarImageUpdate').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        const preview = document.getElementById('imagePreview');
-        preview.src = file ? URL.createObjectURL(file) : document.getElementById('existingImagePath').value;
+        const files = event.target.files;
+        const previewDiv = document.getElementById('imagePreviews');
+        previewDiv.innerHTML = ''; // Clear any previous previews
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const previewImg = document.createElement('img');
+            previewImg.src = URL.createObjectURL(file);
+            previewImg.style = "width: 100px; height: 100px; margin-top: 10px; margin-right: 5px;";
+            previewDiv.appendChild(previewImg);
+        }
     });
 
-    async function serviceUpdate() {
+   async function serviceUpdate() {
     let formData = new FormData();
 
     formData.append('id', document.getElementById('updateID').value);
     formData.append('title', document.getElementById('serviceTitleUpdate').value);
     formData.append('description', document.getElementById('serviceDescriptionUpdate').value);
-    
 
-    const newImage = document.getElementById('homeSidebarImageUpdate').files[0];
-    if (newImage) {
-        formData.append('image', newImage);
+    const newImages = document.getElementById('homeSidebarImageUpdate').files;
+    if (newImages.length > 0) {
+        // Append each selected image to formData
+        for (let i = 0; i < newImages.length; i++) {
+            formData.append('images[]', newImages[i]);
+        }
     } else {
-        formData.append('existing_image', document.getElementById('existingImagePath').value);
+        // If no new image selected, append the existing images
+        formData.append('existing_images', document.getElementById('existingImagePaths').value);
     }
 
     try {
@@ -88,10 +107,9 @@
         });
 
         if (response.data.status === 'success') {
-            // Refresh the sidebar data (or any other UI refresh)
+            // Refresh the service data
             await getServiceData();
 
-            // Show success notification
             Swal.fire({ icon: 'success', title: response.data.message, timer: 2000 });
 
             // Close the modal programmatically
@@ -102,7 +120,7 @@
             Swal.fire({ icon: 'error', title: response.data.message, timer: 2000 });
         }
     } catch (error) {
-        console.error('Error updating sidebar:', error);
+        console.error('Error updating service:', error);
         Swal.fire({ icon: 'error', title: 'Update failed', timer: 2000 });
     }
 }

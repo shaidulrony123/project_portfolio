@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
             $table->string('title');
             $table->string('description', 1000)->nullable(); // Allows up to 1000 characters.
+            $table->json('images'); // Store images as a JSON array
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

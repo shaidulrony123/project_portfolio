@@ -10,10 +10,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <img width="100px" height="100px" id="newServiceImg" src="{{ asset('assets/images/default.jpg') }}" />
+                                <div id="imagePreviewContainer" class="d-flex flex-wrap gap-2">
+                                    <img width="100px" height="100px" src="{{ asset('assets/images/default.jpg') }}" />
+                                </div>
                                 <br />
-                                <label class="form-label mt-2">Image</label>
-                                <input oninput="previewServiceImg(event)" type="file" class="form-control" id="serviceImage" accept="image/*">
+                                <label class="form-label mt-2">Images</label>
+                                <input oninput="previewServiceImages(event)" type="file" multiple class="form-control" id="serviceImages" accept="image/*">
                             </div>
                             <div class="col-12 p-1">
                                 <label class="form-label mt-2">Title</label>
@@ -37,23 +39,34 @@
 
 
 <script>
-    function previewServiceImg(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById('newServiceImg');
-    preview.src = file ? URL.createObjectURL(file) : "{{ asset('assets/images/default.jpg') }}";
+// Image preview function when selecting multiple files
+function previewServiceImages(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    previewContainer.innerHTML = ""; // Clear existing previews
+
+    for (const file of files) {
+        const imgElement = document.createElement('img');
+        imgElement.src = URL.createObjectURL(file);
+        imgElement.width = 100;
+        imgElement.height = 100;
+        imgElement.classList.add('me-2', 'mb-2');
+        previewContainer.appendChild(imgElement);
+    }
 }
 
+// Function to create service and upload images
 async function serviceCreate() {
     try {
-        const serviceImage = document.getElementById('serviceImage').files[0];
+        const serviceImages = document.getElementById('serviceImages').files;
         const serviceTitle = document.getElementById('serviceTitle').value;
         const serviceDescription = document.getElementById('serviceDescription').value;
 
-        // Validate input
-        if (!serviceTitle || !serviceDescription) {
+        // Validate input fields
+        if (!serviceTitle || !serviceDescription || serviceImages.length === 0) {
             Swal.fire({
                 icon: 'warning',
-                title: 'Please fill out all fields!',
+                title: 'Please fill out all fields and select at least one image!',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -63,37 +76,35 @@ async function serviceCreate() {
         let formData = new FormData();
         formData.append('title', serviceTitle);
         formData.append('description', serviceDescription);
-        if (serviceImage) {
-            formData.append('image', serviceImage);
+
+        // Append all selected images to the FormData object
+        for (const image of serviceImages) {
+            formData.append('images[]', image); 
         }
 
-        // Show loader if implemented
-        showLoader();
+        // Log the FormData object (for debugging purposes)
+        console.log(formData);
 
+        // Call API to create service
         const res = await axios.post("/service-create", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
 
-        hideLoader();
-
         if (res.data.status === "success") {
             document.getElementById("create-service-form").reset();
-            document.getElementById('newServiceImg').src = "{{ asset('assets/images/default.jpg') }}";
+            document.getElementById('imagePreviewContainer').innerHTML = ""; // Clear image previews
             document.getElementById('modal-close').click();
-
-            await getServiceData(); // Refresh service list
-            Swal.fire({ icon: 'success', title: res.data.message, timer: 2000 }); // Updated
+            await getServiceData(); // Refresh service list (assumes this function exists)
+            Swal.fire({ icon: 'success', title: res.data.message, timer: 2000 });
         } else {
-            Swal.fire({ icon: 'error', title: res.data.message, timer: 2000 }); // Updated
+            Swal.fire({ icon: 'error', title: res.data.message, timer: 2000 });
         }
     } catch (error) {
-        hideLoader();
         console.error('Error creating service:', error);
         Swal.fire({ icon: 'error', title: 'Create failed', timer: 2000 });
     }
 }
-
 
 </script>
